@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='styles.css') }}" type="text/css" rel="stylesheet">
+        <title>Southeast Sim</title>
+    </head>
+        <body>
+            <h2 align="left"><a href="/" style="color:black; text-decoration: underline;">Return</a></h2>
+            <h1 class="title" align="center">Make your Southeast Division Team!</h1>
+            <br>
+            <h2 align="center">Pick 13 players and scroll down to see your results.</h2>
+            <br>
+            <h3 align="center">All statistics are per-game averages for the 2019-2020 NBA season, courtesy of Basketball Reference.</h3>
+            <br>
+            <div style="display: none">
+                <table style="float: left; border-color: white;">
+                    {% for i in steallplayers %}
+                    <tr style="border-color: white;">
+                        <td style="border-color: white;"><input class="tally" name="{{ i.Name }}" value="{{ i.WS }}"></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <br>
+            <table align="center" class="table">
+                <tr>
+                    <td class="title" colspan="7">Atlanta Hawks</td>
+                </tr>
+                <tr class="title">
+                    <td>*Select*</td>
+                    <td>Name</td>
+                    <td>Points</td>
+                    <td>Rebounds</td>
+                    <td>Assists</td>
+                    <td>Steals</td>
+                    <td>Blocks</td>
+                </tr>
+                {% for i in atlplayers %}
+                    <tr>
+                        <td><input class="wins" type="checkbox" value="{{ i.Name }}" onchange="checking(this.checked)" />&nbsp;</td>
+                        <td>{{ i.Name }}</td>
+                        <td>{{ i.PTS }}</td>
+                        <td>{{ i.TRB }}</td>
+                        <td>{{ i.AST }}</td>
+                        <td>{{ i.STL }}</td>
+                        <td>{{ i.BLK }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td class="title" colspan="7">Charlotte Hornets</td>
+                </tr>
+                <tr class="title">
+                    <td>*Select*</td>
+                    <td>Name</td>
+                    <td>Points</td>
+                    <td>Rebounds</td>
+                    <td>Assists</td>
+                    <td>Steals</td>
+                    <td>Blocks</td>
+                </tr>
+                {% for i in chaplayers %}
+                    <tr>
+                        <td><input class="wins" type="checkbox" value="{{ i.Name }}" onchange="checking(this.checked)" />&nbsp;</td>
+                        <td>{{ i.Name }}</td>
+                        <td>{{ i.PTS }}</td>
+                        <td>{{ i.TRB }}</td>
+                        <td>{{ i.AST }}</td>
+                        <td>{{ i.STL }}</td>
+                        <td>{{ i.BLK }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td class="title" colspan="7">Miami Heat</td>
+                </tr>
+                <tr class="title">
+                    <td>*Select*</td>
+                    <td>Name</td>
+                    <td>Points</td>
+                    <td>Rebounds</td>
+                    <td>Assists</td>
+                    <td>Steals</td>
+                    <td>Blocks</td>
+                </tr>
+                {% for i in miaplayers %}
+                    <tr>
+                        <td><input class="wins" type="checkbox" value="{{ i.Name }}" onchange="checking(this.checked)" />&nbsp;</td>
+                        <td>{{ i.Name }}</td>
+                        <td>{{ i.PTS }}</td>
+                        <td>{{ i.TRB }}</td>
+                        <td>{{ i.AST }}</td>
+                        <td>{{ i.STL }}</td>
+                        <td>{{ i.BLK }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td class="title" colspan="7">Orlando Magic</td>
+                </tr>
+                <tr class="title">
+                    <td>*Select*</td>
+                    <td>Name</td>
+                    <td>Points</td>
+                    <td>Rebounds</td>
+                    <td>Assists</td>
+                    <td>Steals</td>
+                    <td>Blocks</td>
+                </tr>
+                {% for i in orlplayers %}
+                    <tr>
+                        <td><input class="wins" type="checkbox" value="{{ i.Name }}" onchange="checking(this.checked)" />&nbsp;</td>
+                        <td>{{ i.Name }}</td>
+                        <td>{{ i.PTS }}</td>
+                        <td>{{ i.TRB }}</td>
+                        <td>{{ i.AST }}</td>
+                        <td>{{ i.STL }}</td>
+                        <td>{{ i.BLK }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td class="title" colspan="7">Washington Wizards</td>
+                </tr>
+                <tr class="title">
+                    <td>*Select*</td>
+                    <td>Name</td>
+                    <td>Points</td>
+                    <td>Rebounds</td>
+                    <td>Assists</td>
+                    <td>Steals</td>
+                    <td>Blocks</td>
+                </tr>
+                {% for i in wasplayers %}
+                    <tr>
+                        <td><input class="wins" type="checkbox" value="{{ i.Name }}" onchange="checking(this.checked)" />&nbsp;</td>
+                        <td>{{ i.Name }}</td>
+                        <td>{{ i.PTS }}</td>
+                        <td>{{ i.TRB }}</td>
+                        <td>{{ i.AST }}</td>
+                        <td>{{ i.STL }}</td>
+                        <td>{{ i.BLK }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <script>
+            function finish()
+            {
+                total = []
+                x = []
+                n = 0
+                var y = {{ steallplayers[0]|safe }}
+                var checkedValue = null;
+                var inputElements = document.getElementsByClassName('wins');
+                for(var i=0; inputElements[i]; ++i){
+                      if(inputElements[i].checked){
+                           checkedValue = inputElements[i].value;
+                           total.push(checkedValue);
+                           n++;
+                      }
+                }
+                var z = 0;
+                var s = []
+                var winvalue = null;
+                var inputWins = document.getElementsByClassName('tally');
+                for(var m=0; total[m]; ++m){
+                    for(var k=0; inputWins[k]; ++k){
+                          if(inputWins[k].name == total[m]){
+                              winvalue = inputWins[k].value * 10;
+                              s.push(winvalue);
+                          }
+                    }
+                }
+                var sum = 0;
+                for(var i=0; i < s.length; i++){
+                    sum += s[i]
+                    }
+                sum = sum / 10
+                if (sum > 82) {
+                    sum = 'all 82'
+                }
+                if (n != 13) {
+                    alert(s)
+                }
+                document.querySelector('#finalize').innerHTML = 'In the 2019-2020 NBA season, your fantasy team would win ' + sum + ' games.';
+            }
+            </script>
+            <form align="center" onsubmit="finish(); return false">
+                <input type="submit" value="Finalize your team">
+            </form>
+            <br>
+            <h2 id="finalize" align="center">----</h2>
+            <br>
+            <h3 align="center"><a href="/southeastsim">Reset</a></h3>
+            <br>
+        </body>
+</html>

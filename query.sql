@@ -1,0 +1,1 @@
+create table 'users' ('id' integer, 'username' text not null, 'hash' numeric);
