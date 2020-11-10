@@ -14,3 +14,5 @@ six more for the divisions). For all HTML pages, I used a Bootstrap stylesheet t
 pages, I downloaded player performance data from Basketball Reference, which I then displayed through HTML using Python dictionaries, displayed through
 Jinja. To calculate the final number of wins, I summed each selected player's Win Shares metric together. If the total number of wins exceeds 82 (the
 number of games in an NBA season), the program returns "all 82" games rather than any number above 82.
+
+Go into the terminal, run the main.py python script
